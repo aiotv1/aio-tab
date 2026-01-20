@@ -322,10 +322,22 @@ document.addEventListener('DOMContentLoaded', () => {
         settingsPanel.classList.toggle('hidden');
     });
 
-    // Close panel when clicking outside
+    // AI Tools Toggle
+    const aiToolsTrigger = document.getElementById('ai-tools-trigger');
+    const aiToolsList = document.getElementById('ai-tools-list');
+
+    aiToolsTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        aiToolsList.classList.toggle('hidden');
+    });
+
+    // Close panels when clicking outside
     document.addEventListener('click', (e) => {
         if (!settingsPanel.contains(e.target) && !settingsTrigger.contains(e.target)) {
             settingsPanel.classList.add('hidden');
+        }
+        if (!aiToolsList.contains(e.target) && !aiToolsTrigger.contains(e.target)) {
+            aiToolsList.classList.add('hidden');
         }
     });
 
