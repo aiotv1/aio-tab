@@ -1,0 +1,814 @@
+body {
+    font-family: arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Prevent scrollbars if blur goes edge */
+}
+
+/* Background Layer */
+#bg-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #202124;
+    /* Default */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-color 0.3s ease, filter 0.3s ease;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin-top: -100px;
+    /* Shift up slightly visually */
+    animation: blurIn 0.8s ease-out forwards;
+}
+
+@keyframes blurIn {
+    0% {
+        opacity: 0;
+        filter: blur(50px);
+        transform: scale(0.95);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1);
+    }
+}
+
+.logo {
+    margin-bottom: 30px;
+    user-select: none;
+}
+
+.logo-img {
+    width: 400px;
+    /* Medium size */
+    height: auto;
+    display: block;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 584px;
+    height: 44px;
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    box-shadow: none;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.search-container:hover,
+.search-container:focus-within {
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    border-color: rgba(223, 225, 229, 0);
+}
+
+.search-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: #9aa0a6;
+    margin-top: 3px;
+}
+
+#search-input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    margin: 0 10px;
+    height: 100%;
+}
+
+.shortcuts {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.shortcut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #303134;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px;
+    width: 80px;
+    transition: background-color 0.2s;
+}
+
+.shortcut:hover {
+    background-color: #e8eaed;
+    border-radius: 8px;
+}
+
+.shortcut-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    background: transparent !important;
+}
+
+.shortcut-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0;
+}
+
+.shortcut-title {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: center;
+}
+
+/* Dark mode support and Manual Dark Background */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #202124;
+        color: #e8eaed;
+    }
+
+    .search-container {
+        background-color: #303134;
+        border-color: #303134;
+    }
+
+    .search-container:hover,
+    .search-container:focus-within {
+        background-color: #303134;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    #search-input {
+        background-color: transparent;
+        color: #e8eaed;
+    }
+
+    .shortcut {
+        color: #e8eaed;
+    }
+}
+
+/* Manual Dark override */
+body.dark-bg {
+    color: #e8eaed;
+}
+
+body.dark-bg .search-container {
+    background-color: #303134;
+    border-color: #303134;
+}
+
+body.dark-bg .search-container:hover,
+body.dark-bg .search-container:focus-within {
+    background-color: #303134;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-bg #search-input {
+    background-color: transparent;
+    color: #e8eaed;
+}
+
+body.dark-bg .shortcut {
+    color: #e8eaed;
+}
+
+body.dark-bg .shortcut:hover {
+    background-color: #303134;
+}
+
+/* Manual Light override (Morning Mode) - Enforce dark text/icons even in Dark Mode */
+body.light-bg {
+    color: #303134 !important;
+}
+
+body.light-bg .search-container {
+    background-color: #fff !important;
+    border-color: #dfe1e5 !important;
+}
+
+body.light-bg .search-container:hover,
+body.light-bg .search-container:focus-within {
+    background-color: #fff !important;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28) !important;
+    border-color: rgba(223, 225, 229, 0) !important;
+}
+
+body.light-bg #search-input {
+    color: #303134 !important;
+    background-color: transparent !important;
+}
+
+body.light-bg .shortcut {
+    color: #303134 !important;
+}
+
+body.light-bg .shortcut:hover {
+    background-color: #e8eaed !important;
+}
+
+body.light-bg .settings-icon svg {
+    fill: #5f6368 !important;
+}
+
+body.light-bg .settings-icon:hover {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+
+/* Settings Styles */
+.settings-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.settings-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.settings-icon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.settings-panel {
+    position: absolute;
+    bottom: 50px;
+    right: 0;
+    width: 250px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-panel.hidden {
+    display: none;
+}
+
+.settings-section h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #5f6368;
+}
+
+.bg-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.bg-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.color-picker-wrapper {
+    background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
+    border-radius: 50%;
+    overflow: hidden;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#custom-color-picker {
+    width: 150%;
+    height: 150%;
+    border: none;
+    padding: 0;
+    margin: -25%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.image-upload-option {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.upload-btn,
+.remove-btn {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    text-align: center;
+    background-color: #f1f3f4;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #3c4043;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.upload-btn:hover,
+.remove-btn:hover {
+    background-color: #e8eaed;
+}
+
+.remove-btn.hidden {
+    display: none;
+}
+
+/* Dark mode overrides for settings */
+@media (prefers-color-scheme: dark) {
+    .settings-icon svg {
+        fill: #e8eaed;
+    }
+
+    .settings-icon:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .settings-panel {
+        background-color: #303134;
+        color: #e8eaed;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .settings-section h3 {
+        color: #9aa0a6;
+    }
+
+    .upload-btn,
+    .remove-btn {
+        background-color: #202124;
+        color: #e8eaed;
+        border: 1px solid #5f6368;
+    }
+
+    .upload-btn:hover,
+    .remove-btn:hover {
+        background-color: #3c4043;
+    }
+}
+
+/* Custom Color Picker Styles */
+.custom-cp-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.cp-wrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cp-hue-ring {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: default;
+}
+
+/* Mask for the ring to make it hollow */
+.cp-hue-ring::after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    right: 15%;
+    bottom: 15%;
+    background: white;
+    /* Matches settings panel bg */
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.cp-hue-handle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 10;
+    left: 50%;
+    top: 0%;
+    /* Start at Red (top) */
+}
+
+.cp-sl-square {
+    position: relative;
+    width: 50%;
+    height: 50%;
+    background-color: red;
+    /* Initial Hue */
+    z-index: 5;
+    cursor: default;
+}
+
+/* Gradients for Saturation (Left->Right: White->Color) and Value (Top->Bottom: Transparent->Black) */
+.cp-sl-square::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #fff, transparent);
+    z-index: 1;
+}
+
+.cp-sl-square::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent, #000);
+    z-index: 2;
+}
+
+.cp-sl-handle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    pointer-events: none;
+    top: 0;
+    left: 100%;
+    /* Top right (High Sat, High Val) */
+}
+
+/* Dark mode adjust for picker ring mask and handles */
+@media (prefers-color-scheme: dark) {
+    .cp-hue-ring::after {
+        background: #303134;
+    }
+}
+
+/* Mode Toggle Styles */
+.mode-options {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 6px 0;
+    font-size: 13px;
+    border: 1px solid #dfe1e5;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #3c4043;
+}
+
+.mode-btn:hover {
+    background-color: #f1f3f4;
+}
+
+.mode-btn.active {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+    border-color: #1a73e8;
+    font-weight: 500;
+}
+
+/* Dark mode for mode buttons */
+@media (prefers-color-scheme: dark) {
+    .mode-btn {
+        background-color: #202124;
+        border-color: #5f6368;
+        color: #e8eaed;
+    }
+
+    .mode-btn:hover {
+        background-color: #303134;
+    }
+
+    .mode-btn.active {
+        background-color: #41331c;
+        color: #8ab4f8;
+        border-color: #8ab4f8;
+    }
+
+    /* Modal Styles */
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 300px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-weight: 500;
+        color: #202124;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 13px;
+        color: #5f6368;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #dfe1e5;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #1a73e8;
+    }
+
+    .modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .modal-buttons button {
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+    }
+
+    .btn-cancel {
+        background-color: transparent;
+        color: #1a73e8;
+    }
+
+    .btn-cancel:hover {
+        background-color: rgba(26, 115, 232, 0.1);
+    }
+
+    .btn-save {
+        background-color: #1a73e8;
+        color: white;
+    }
+
+    .btn-save:hover {
+        background-color: #1669d6;
+    }
+
+    /* Dark Modal */
+    @media (prefers-color-scheme: dark) {
+        .modal-content {
+            background-color: #303134;
+            color: #e8eaed;
+        }
+
+        .modal-content h3 {
+            color: #e8eaed;
+        }
+
+        .form-group label {
+            color: #9aa0a6;
+        }
+
+        .form-group input {
+            background-color: #202124;
+            border-color: #5f6368;
+            color: #e8eaed;
+        }
+
+        .btn-cancel {
+            color: #8ab4f8;
+        }
+
+        .btn-cancel:hover {
+            background-color: rgba(138, 180, 248, 0.1);
+        }
+
+        .btn-save {
+            background-color: #8ab4f8;
+            color: #202124;
+        }
+    }
+
+    /* Add Shortcut Button Specifics */
+    .shortcut-add-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 64px;
+        height: 64px;
+        border-radius: 0;
+        /* Keep square as requested before for icons, or match style */
+        background-color: transparent;
+        /* Or maybe a light bg? */
+        cursor: pointer;
+        margin-bottom: 8px;
+    }
+
+    .shortcut-add-btn div {
+        width: 64px;
+        height: 64px;
+        background-color: #f1f3f4;
+        border-radius: 5px;
+        /* Slight radius */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .shortcut-add-btn svg {
+        fill: #5f6368;
+    }
+
+    /* Shortcut Delete Button */
+    .shortcut-delete {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 20px;
+        height: 20px;
+        background-color: rgba(30, 30, 30, 0.9);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        line-height: 1;
+        opacity: 0;
+        transition: opacity 0.2s;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .shortcut:hover .shortcut-delete {
+        opacity: 1;
+    }
+
+    /* Dark mode adjustments for add button */
+    @media (prefers-color-scheme: dark) {
+        .shortcut-add-btn div {
+            background-color: #303134;
+        }
+
+        .shortcut-add-btn svg {
+            fill: #e8eaed;
+        }
+    }
+
+
+    body.dark-bg .shortcut-add-btn div {
+        background-color: #303134;
+    }
+
+    body.dark-bg .shortcut-add-btn svg {
+        fill: #e8eaed;
+    }
+
+    body.light-bg .shortcut-add-btn div {
+        background-color: #f1f3f4;
+    }
+
+    body.light-bg .shortcut-add-btn svg {
+        fill: #5f6368;
+    }
+
+    /* Utility */
+    .hidden {
+        display: none !important;
+    }
+
+    /* Context Menu */
+    .context-menu {
+        position: absolute;
+        background-color: white;
+        border: 1px solid #dfe1e5;
+        border-radius: 4px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        min-width: 120px;
+        z-index: 10000;
+    }
+
+    .context-menu-item {
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #3c4043;
+    }
+
+    .context-menu-item:hover {
+        background-color: #f1f3f4;
+    }
+
+    .context-menu-item.delete {
+        color: #d93025;
+    }
+
+    /* Dark mode for Context Menu */
+    @media (prefers-color-scheme: dark) {
+        .context-menu {
+            background-color: #303134;
+            border-color: #5f6368;
+        }
+
+        .context-menu-item {
+            color: #e8eaed;
+        }
+
+        .context-menu-item:hover {
+            background-color: #3c4043;
+        }
+    }
+
+    /* Manual Dark Mode Override for Context Menu */
+    body.dark-bg .context-menu {
+        background-color: #303134;
+        border-color: #5f6368;
+    }
+
+    body.dark-bg .context-menu-item {
+        color: #e8eaed;
+    }
+
+    body.dark-bg .context-menu-item:hover {
+        background-color: #3c4043;
+    }
