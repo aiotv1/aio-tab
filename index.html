@@ -16,8 +16,7 @@
 
     <div class="main-container">
         <div class="logo">
-            <img src="https://raw.githubusercontent.com/aiotv1/aio-tab/refs/heads/main/logo.png"
-                onerror="this.src='logo.png'" alt="Logo" class="logo-img">
+            <img src="logo.png" id="main-logo" alt="Logo" class="logo-img">
         </div>
 
         <div class="search-container">
@@ -111,6 +110,10 @@
         </div>
     </div>
 
+    <div id="shortcuts-section" class="ai-tools-list hidden">
+        <!-- Bottom shortcuts will be injected here -->
+    </div>
+
     <div class="settings-container">
         <div class="settings-icon" id="settings-trigger">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#5f6368">
@@ -119,48 +122,129 @@
             </svg>
         </div>
         <div class="settings-panel hidden" id="settings-panel">
-            <div class="settings-section">
-                <h3>UI Mode</h3>
-                <div class="mode-options">
-                    <button id="mode-auto" class="mode-btn active">Auto</button>
-                    <button id="mode-light" class="mode-btn">Light</button>
-                    <button id="mode-dark" class="mode-btn">Dark</button>
+            <div class="settings-tabs">
+                <button class="settings-tab-btn active" data-tab="appearance">Appearance</button>
+                <button class="settings-tab-btn" data-tab="shortcuts">Shortcuts</button>
+                <button class="settings-tab-btn" data-tab="about">About</button>
+            </div>
+
+            <div class="tab-content" id="tab-appearance">
+                <div class="settings-section">
+                    <h3>UI Mode</h3>
+                    <div class="mode-options">
+                        <button id="mode-auto" class="mode-btn active">Auto</button>
+                        <button id="mode-light" class="mode-btn">Light</button>
+                        <button id="mode-dark" class="mode-btn">Dark</button>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Background</h3>
+                    <div class="bg-options">
+                        <div class="bg-option color-circle" data-color="#ffffff" title="White"
+                            style="background-color: #ffffff; border: 1px solid #ddd;"></div>
+                        <div class="bg-option color-circle" data-color="#202124" title="Dark Gray"
+                            style="background-color: #202124;"></div>
+                        <div class="bg-option color-circle" data-color="#000000" title="OLED Black"
+                            style="background-color: #000000;"></div>
+                    </div>
+
+                    <div id="color-picker-container" class="custom-cp-container">
+                        <div class="cp-wrapper">
+                            <div class="cp-hue-ring" id="cp-hue-ring">
+                                <div class="cp-hue-handle" id="cp-hue-handle"></div>
+                            </div>
+                            <div class="cp-sl-square" id="cp-sl-square">
+                                <div class="cp-sl-handle" id="cp-sl-handle"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-upload-option">
+                        <label for="bg-image-upload" class="upload-btn">Upload Image</label>
+                        <input type="file" id="bg-image-upload" accept="image/*" hidden>
+                        <button id="remove-bg-image" class="remove-btn hidden">Remove Image</button>
+                    </div>
+
+                    <div class="blur-control" style="margin-top: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <label for="blur-slider" style="font-size: 13px; color: #5f6368;">Blur</label>
+                            <span id="blur-value" style="font-size: 13px; color: #5f6368;">0px</span>
+                        </div>
+                        <input type="range" id="blur-slider" min="0" max="20" value="0" style="width: 100%;">
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Logo Color</h3>
+                    <div class="setting-row-group">
+                        <div class="setting-row">
+                            <span>Hue Shift</span>
+                            <span id="logo-hue-value">0°</span>
+                        </div>
+                        <input type="range" id="logo-hue-slider" min="0" max="360" value="0" style="width: 100%;">
+                    </div>
+                    <div class="setting-row" style="margin-top: 10px;">
+                        <span>Monochrome Tint</span>
+                        <label class="switch">
+                            <input type="checkbox" id="logo-tint-toggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
                 </div>
             </div>
 
-            <div class="settings-section">
-                <h3>Background</h3>
-                <div class="bg-options">
-                    <div class="bg-option color-circle" data-color="#ffffff" title="White"
-                        style="background-color: #ffffff; border: 1px solid #ddd;"></div>
-                    <div class="bg-option color-circle" data-color="#202124" title="Dark Gray"
-                        style="background-color: #202124;"></div>
-                    <div class="bg-option color-circle" data-color="#000000" title="OLED Black"
-                        style="background-color: #000000;"></div>
-                </div>
-
-                <div id="color-picker-container" class="custom-cp-container">
-                    <div class="cp-wrapper">
-                        <div class="cp-hue-ring" id="cp-hue-ring">
-                            <div class="cp-hue-handle" id="cp-hue-handle"></div>
+            <div class="tab-content hidden" id="tab-shortcuts">
+                <div class="settings-section">
+                    <h3>Bottom Shortcuts</h3>
+                    <div class="bottom-shortcuts-management">
+                        <div class="setting-row">
+                            <span>Enable</span>
+                            <label class="switch">
+                                <input type="checkbox" id="bottom-shortcuts-toggle">
+                                <span class="slider"></span>
+                            </label>
                         </div>
-                        <div class="cp-sl-square" id="cp-sl-square">
-                            <div class="cp-sl-handle" id="cp-sl-handle"></div>
+                        <div class="setting-row">
+                            <span>Transparent Style</span>
+                            <label class="switch">
+                                <input type="checkbox" id="bottom-shortcuts-style-toggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-row-group" style="margin-top: 10px;">
+                            <div class="setting-row">
+                                <span>Icon Size</span>
+                                <span id="icon-size-value">24px</span>
+                            </div>
+                            <input type="range" id="bottom-shortcuts-size-slider" min="16" max="48" value="24"
+                                style="width: 100%;">
+                        </div>
+                        <div class="setting-row-group" style="margin-top: 10px;">
+                            <div class="setting-row">
+                                <span>Icon Gap</span>
+                                <span id="icon-gap-value">15px</span>
+                            </div>
+                            <input type="range" id="bottom-shortcuts-gap-slider" min="0" max="40" value="15"
+                                style="width: 100%;">
+                        </div>
+                        <div id="bottom-shortcuts-list-mgmt" class="mgmt-list" style="margin-top: 10px;">
+                            <!-- Management items injected by JS -->
+                        </div>
+                        <div class="add-bottom-shortcut">
+                            <input type="text" id="new-bottom-shortcut-url" placeholder="https://...">
+                            <button id="add-bottom-shortcut-btn">+</button>
                         </div>
                     </div>
                 </div>
-                <div class="image-upload-option">
-                    <label for="bg-image-upload" class="upload-btn">Upload Image</label>
-                    <input type="file" id="bg-image-upload" accept="image/*" hidden>
-                    <button id="remove-bg-image" class="remove-btn hidden">Remove Image</button>
-                </div>
+            </div>
 
-                <div class="blur-control" style="margin-top: 15px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                        <label for="blur-slider" style="font-size: 13px; color: #5f6368;">Blur</label>
-                        <span id="blur-value" style="font-size: 13px; color: #5f6368;">0px</span>
-                    </div>
-                    <input type="range" id="blur-slider" min="0" max="20" value="0" style="width: 100%;">
+            <div class="tab-content hidden" id="tab-about">
+                <div class="settings-section about-section">
+                    <h3>About</h3>
+                    <p><strong>AIO Tab Extension</strong></p>
+                    <p>A clean, professional new tab experience with customizable features.</p>
+                    <p>Designed by <a href="https://github.com/aiotv1" target="_blank">Aiotv1</a></p>
+                    <p>Version 1.0.0</p>
                 </div>
             </div>
         </div>
@@ -168,7 +252,10 @@
 
 
 
+
+
     <script src="color-picker.js"></script>
+    <script src="logo-color.js"></script>
     <script src="script.js"></script>
 </body>
 

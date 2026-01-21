@@ -277,13 +277,43 @@ body.light-bg .settings-icon:hover {
     position: absolute;
     bottom: 50px;
     right: 0;
-    width: 250px;
+    width: 280px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     padding: 15px;
     display: flex;
     flex-direction: column;
+}
+
+/* Settings Tabs */
+.settings-tabs {
+    display: flex;
+    border-bottom: 1px solid #dfe1e5;
+    margin-bottom: 15px;
+    gap: 5px;
+}
+
+.settings-tab-btn {
+    flex: 1;
+    padding: 8px 0;
+    font-size: 13px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #5f6368;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-bottom-color 0.2s;
+}
+
+.settings-tab-btn:hover {
+    color: #202124;
+}
+
+.settings-tab-btn.active {
+    color: #1a73e8;
+    border-bottom-color: #1a73e8;
+    font-weight: 500;
 }
 
 .settings-panel.hidden {
@@ -821,7 +851,7 @@ body.light-bg .settings-icon:hover {
         display: flex;
         align-items: center;
         z-index: 100;
-        height: 51px;
+        height: min-content;
     }
 
     .ai-tools-icon {
@@ -932,3 +962,284 @@ body.light-bg .settings-icon:hover {
             color: #e8eaed;
         }
     }
+
+    /* Bottom Shortcuts Section */
+    #shortcuts-section {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-left: 0;
+        z-index: 90;
+        /* Slightly below other containers to avoid overlap if any */
+        animation: fadeInBottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        height: min-content;
+    }
+
+    @keyframes fadeInBottom {
+        from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(10px) scale(0.95);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0) scale(1);
+        }
+    }
+
+    #shortcuts-section.hidden {
+        display: none !important;
+    }
+
+    /* Bottom Shortcuts Settings Management */
+    .bottom-shortcuts-management {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .setting-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        color: #5f6368;
+        margin-bottom: 5px;
+    }
+
+    .setting-row-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    /* Switch Style */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 34px;
+        height: 20px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 20px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked+.slider {
+        background-color: #1a73e8;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #1a73e8;
+    }
+
+    input:checked+.slider:before {
+        transform: translateX(14px);
+    }
+
+    .mgmt-list {
+        max-height: 150px;
+        overflow-y: auto;
+        border: 1px solid #dfe1e5;
+        border-radius: 4px;
+        padding: 5px;
+    }
+
+    .mgmt-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4px 8px;
+        font-size: 11px;
+        border-bottom: 1px solid #f1f3f4;
+    }
+
+    .mgmt-item:last-child {
+        border-bottom: none;
+    }
+
+    .mgmt-item span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-grow: 1;
+        margin-right: 10px;
+    }
+
+    .mgmt-item .remove-btn-small {
+        background: none;
+        border: none;
+        color: #d93025;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 0 5px;
+    }
+
+    .add-bottom-shortcut {
+        display: flex;
+        gap: 5px;
+    }
+
+    .add-bottom-shortcut input {
+        flex-grow: 1;
+        padding: 5px;
+        font-size: 12px;
+        border: 1px solid #dfe1e5;
+        border-radius: 4px;
+    }
+
+    .add-bottom-shortcut button {
+        padding: 5px 10px;
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    /* Dark mode for management section */
+    @media (prefers-color-scheme: dark) {
+        .setting-row {
+            color: #9aa0a6;
+        }
+
+        input:checked+.slider {
+            background-color: #8ab4f8;
+        }
+
+        .mgmt-list {
+            border-color: #5f6368;
+        }
+
+        .mgmt-item {
+            border-bottom-color: #3c4043;
+            color: #e8eaed;
+        }
+
+        .add-bottom-shortcut input {
+            background-color: #202124;
+            border-color: #5f6368;
+            color: #e8eaed;
+        }
+
+        .add-bottom-shortcut button {
+            background-color: #8ab4f8;
+            color: #202124;
+        }
+    }
+
+    body.dark-bg .setting-row {
+        color: #9aa0a6;
+    }
+
+    body.dark-bg input:checked+.slider {
+        background-color: #8ab4f8;
+    }
+
+    body.dark-bg .mgmt-list {
+        border-color: #5f6368;
+    }
+
+    body.dark-bg .mgmt-item {
+        border-bottom-color: #3c4043;
+        color: #e8eaed;
+    }
+
+    body.dark-bg .add-bottom-shortcut input {
+        background-color: #202124;
+        border-color: #5f6368;
+        color: #e8eaed;
+    }
+
+    body.dark-bg .add-bottom-shortcut button {
+        background-color: #8ab4f8;
+        color: #202124;
+    }
+
+    /* Transparent Style for Shortcuts Section */
+    #shortcuts-section.transparent {
+        background-color: transparent !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+    }
+
+    /* Settings Tab Dark Mode */
+    @media (prefers-color-scheme: dark) {
+        .settings-tabs {
+            border-bottom-color: #5f6368;
+        }
+
+        .settings-tab-btn {
+            color: #9aa0a6;
+        }
+
+        .settings-tab-btn:hover {
+            color: #e8eaed;
+        }
+
+        .settings-tab-btn.active {
+            color: #8ab4f8;
+            border-bottom-color: #8ab4f8;
+        }
+
+        .about-section p {
+            color: #e8eaed;
+        }
+    }
+
+    body.dark-bg .settings-tabs {
+        border-bottom-color: #5f6368;
+    }
+
+    body.dark-bg .settings-tab-btn {
+        color: #9aa0a6;
+    }
+
+    body.dark-bg .settings-tab-btn.active {
+        color: #8ab4f8;
+        border-bottom-color: #8ab4f8;
+    }
+
+    body.dark-bg .about-section p {
+        color: #e8eaed;
+    }
+
+    .about-section p {
+        font-size: 12px;
+        color: #3c4043;
+        margin: 5px 0;
+    }
+
+    .about-section a {
+        color: #1a73e8;
+        text-decoration: none;
+    }
+}
