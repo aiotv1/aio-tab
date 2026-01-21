@@ -12,17 +12,29 @@
 - **AI Tools Shortcut**: A dedicated panel for quick access to top AI models:
   - ChatGPT, Gemini, Claude, Copilot, Perplexity, DeepSeek, and Meta AI.
 
+### 🔗 Bottom Shortcuts Bar / شريط الاختصارات السفلي
+- **Quick Links**: A dedicated bar at the bottom for your favorite social and productivity apps.
+- **SVG Integration**: High-quality SVG icons for YouTube, Gmail, Telegram, WhatsApp, X, Discord, and more.
+- **Full Customization**:
+  - **Switch Toggle**: Enable or disable the bar from settings.
+  - **Transparent Style**: Switch between Glassmorphism and a clean transparent look.
+  - **Icon Size & Gap**: Fine-tune icons' size and spacing to fit your screen.
+  - **Dynamic Management**: Add/Remove links directly from the settings panel.
+
 ### 🎨 Personalization
+- **Tabbed Settings Panel**: Organized settings into Appearance, Shortcuts, and About tabs.
 - **Theme Modes**: Support for Light, Dark, and Auto (System) modes.
 - **Custom Backgrounds**:
-  - Choose from preset colors (White, Dark, OLED Black).
-  - Use a high-quality **Custom Color Picker**.
-  - **Upload your own image** to use as a background.
-- **Blur Effects**: Adjust background blur for better readability and a premium "Glassmorphism" look.
+  - Choose from preset colors (White, Dark, OLED Black) or use the **Custom Color Picker**.
+  - **Upload your own image** and adjust **Blur Effects**.
+- **Logo Customization**:
+  - **Hue Shift**: Change the logo color to match your theme.
+  - **Monochrome Tint**: Switch to a sleek grayscale/tinted look.
 
 ### ⚡ Performance & Design
 - **Fast & Lightweight**: Built with vanilla JS/CSS for maximum speed.
-- **Responsive & Modern**: Smooth animations and a sleek user interface.
+- **Hybrid Logo Loading**: Loads local logo instantly and upgrades to remote version if internet is available.
+- **Premium Aesthetics**: Smooth animations and a sleek user interface.
 
 ---
 
