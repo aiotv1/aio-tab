@@ -591,7 +591,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const link = document.createElement('a');
             link.href = url;
-            link.target = '_blank';
+            link.target = '_self';
             link.className = 'ai-tool-item';
 
             // Check if we have an SVG for this domain
