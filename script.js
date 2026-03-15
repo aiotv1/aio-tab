@@ -52,14 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let contextMenuShortcutIndex = -1;
 
     const defaultShortcuts = [
-        { title: 'i.pack', url: 'https://www.oussamaidiken.site/i.pack', icon: 'i.pack.png', isLocal: true },
-        { title: 'stuff', url: 'https://www.oussamaidiken.site/stuff', icon: 'stuff.png', isLocal: true },
-        { title: 'tag', url: 'https://www.oussamaidiken.site/TAG', icon: 'tag.png', isLocal: true },
-        { title: 'meta', url: 'https://www.oussamaidiken.site/meta', icon: 'meta.png', isLocal: true },
-        { title: 'text editor', url: 'https://www.oussamaidiken.site/txt', icon: 'txt.png', isLocal: true },
-        { title: 'lab', url: 'https://www.oussamaidiken.site/lab', icon: 'lab.png', isLocal: true },
-        { title: 'ctrl + v', url: 'https://www.oussamaidiken.site/ctrlv', icon: 'ctrlv.png', isLocal: true },
-        { title: 'الأذان', url: 'https://www.oussamaidiken.site/Prayer-Times', icon: 'adan.png', isLocal: true }
+        { title: 'i.pack', url: 'https://www.idiken.com/i.pack', icon: 'i.pack.png', isLocal: true },
+        { title: 'stuff', url: 'https://www.idiken.com/stuff', icon: 'stuff.png', isLocal: true },
+        { title: 'tag', url: 'https://www.idiken.com/TAG', icon: 'tag.png', isLocal: true },
+        { title: 'meta', url: 'https://www.idiken.com/meta', icon: 'meta.png', isLocal: true },
+        { title: 'text editor', url: 'https://www.idiken.com/txt', icon: 'txt.png', isLocal: true },
+        { title: 'lab', url: 'https://www.idiken.com/lab', icon: 'lab.png', isLocal: true },
+        { title: 'ctrl + v', url: 'https://www.idiken.com/ctrlv', icon: 'ctrlv.png', isLocal: true },
+        { title: 'الأذان', url: 'https://www.idiken.com/Prayer-Times', icon: 'adan.png', isLocal: true }
     ];
 
     let shortcuts = JSON.parse(localStorage.getItem('shortcuts')) || defaultShortcuts;
