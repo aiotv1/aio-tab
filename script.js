@@ -784,7 +784,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Logo Remote Upgrade Logic ---
     const mainLogoItem = document.getElementById('main-logo');
     if (mainLogoItem) {
-        const remoteLogoUrl = 'https://raw.githubusercontent.com/aiotv1/aio-tab/refs/heads/main/logo.png';
+        const remoteLogoUrl = 'https://aio-tab.vercel.app/logo.png';
         const tempImg = new Image();
         tempImg.onload = () => {
             mainLogoItem.src = remoteLogoUrl;
